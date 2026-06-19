@@ -31,10 +31,27 @@ const app = express();
 
 // --- 1. Global Security & Middlewares ---
 app.use(helmet()); // HTTP হেডার সিকিউর করে
+
+// 💡 ডাইনামিক CORS অরিজিন সেটআপ (লোকালহোস্ট এবং ভেরসেল দুইটাই সাপোর্ট করবে)
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://schoolmanagement-seven-chi.vercel.app'
+];
+
 app.use(cors({
-  origin: 'http://localhost:3000', // আপনার Next.js ফ্রন্টএন্ডের URL
+  origin: function (origin, callback) {
+    // মোবাইল অ্যাপ, কার্ল (curl) বা কোনো অরিজিন ছাড়া রিকোয়েস্ট পাস করতে দেওয়া
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS policy'));
+    }
+  },
   credentials: true, // কুকিজ (Cookies) আদান-প্রদানের জন্য
 }));
+
 app.use(express.json({ limit: '16kb' })); // JSON ডেটা রিসিভ করার জন্য
 app.use(express.urlencoded({ extended: true, limit: '16kb' }));
 app.use(cookieParser()); // ব্রাউজারের কুকি পড়ার জন্য
