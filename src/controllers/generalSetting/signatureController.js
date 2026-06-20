@@ -30,7 +30,8 @@ const defaultSignatures = [
   { key: 'mark_sheet_middle', title: 'Mark Sheet Middle' },
   { key: 'mark_sheet_right', title: 'Mark Sheet Right' },
   { key: 'tc_left', title: 'TC Left' },
-  { key: 'tc_right', title: 'TC Right' }
+  { key: 'tc_right', title: 'TC Right' },
+  { key: 'principal', title: 'Principal'}
 ];
 
 export const getSignatureSettings = async (req, res, next) => {

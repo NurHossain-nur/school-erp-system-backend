@@ -27,6 +27,9 @@ import mappingRoutes from './routes/config/mappingRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import signatureRoutes from './routes/generalSetting/signatureRoutes.js';
 
+import examRoutineSessionRoutes from './routes/examroutine/routineSessionRoutes.js';
+import examRoutineProcessRoutes from './routes/examroutine/examRoutineProcessRoutes.js';
+
 const app = express();
 
 // --- 1. Global Security & Middlewares ---
@@ -88,6 +91,10 @@ app.use('/api/v1/routes', routeRoutes);
 app.use('/api/v1/mappings', mappingRoutes);
 app.use('/api/v1/upload', uploadRoutes);
 app.use('/api/v1/signatures', signatureRoutes);
+
+
+app.use('/api/v1/exam-routine/sessions', examRoutineSessionRoutes);
+app.use('/api/v1/exam-routine/process', examRoutineProcessRoutes);
 
 // --- 4. 404 Route Handler ---
 app.all('/', (req, res) => {
