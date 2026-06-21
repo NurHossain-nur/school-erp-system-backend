@@ -1,4 +1,4 @@
-// src/controllers/signatureController.js
+// src/controllers/generalSetting/signatureController.js
 import Signature from '../../models/generalSetting/Signature.js';
 
 // ডিফল্ট টাইটেল লিস্ট (আপনার স্ক্রিনশট থেকে নেওয়া)

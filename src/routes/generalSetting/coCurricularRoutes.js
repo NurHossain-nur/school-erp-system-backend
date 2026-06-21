@@ -1,6 +1,6 @@
-// src/routes/generalsetting/coCurricularRoutes.js
+// src/routes/generalSetting/coCurricularRoutes.js
 import express from 'express';
-import { getCoCurriculars, createCoCurricular, getCoCurricularById, updateCoCurricular, deleteCoCurricular } from '../../controllers/generalsetting/coCurricularController.js';
+import { getCoCurriculars, createCoCurricular, getCoCurricularById, updateCoCurricular, deleteCoCurricular } from '../../controllers/generalSetting/coCurricularController.js';
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
-// src/controllers/generalsetting/occupationController.js
-import Occupation from '../../models/generalsetting/Occupation.js';
+// src/controllers/generalSetting/occupationController.js
+import Occupation from '../../models/generalSetting/Occupation.js';
 
 export const getOccupations = async (req, res, next) => {
   try {

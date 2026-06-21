@@ -1,4 +1,4 @@
-// src/routes/generalsetting/moralBehaviorRoutes.js
+// src/routes/generalSetting/moralBehaviorRoutes.js
 import express from 'express';
 import { 
   getMoralBehaviors, 
@@ -6,7 +6,7 @@ import {
   getMoralBehaviorById, 
   updateMoralBehavior, 
   deleteMoralBehavior 
-} from '../../controllers/generalsetting/moralBehaviorController.js';
+} from '../../controllers/generalSetting/moralBehaviorController.js';
 
 const router = express.Router();
 

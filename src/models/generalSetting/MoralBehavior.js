@@ -1,4 +1,4 @@
-// src/models/generalsetting/MoralBehavior.js
+// src/models/generalSetting/MoralBehavior.js
 import mongoose from 'mongoose';
 
 const moralBehaviorSchema = new mongoose.Schema(

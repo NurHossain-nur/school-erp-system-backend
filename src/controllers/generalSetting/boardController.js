@@ -1,5 +1,5 @@
-// src/controllers/generalsetting/boardController.js
-import Board from '../../models/generalsetting/Board.js';
+// src/controllers/generalSetting/boardController.js
+import Board from '../../models/generalSetting/Board.js';
 
 export const getBoards = async (req, res, next) => {
   try {

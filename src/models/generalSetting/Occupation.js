@@ -1,4 +1,4 @@
-// src/models/generalsetting/Occupation.js
+// src/models/generalSetting/Occupation.js
 import mongoose from 'mongoose';
 
 const occupationSchema = new mongoose.Schema(

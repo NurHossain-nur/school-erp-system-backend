@@ -1,5 +1,5 @@
-// src/controllers/generalsetting/moralBehaviorController.js
-import MoralBehavior from '../../models/generalsetting/MoralBehavior.js';
+// src/controllers/generalSetting/moralBehaviorController.js
+import MoralBehavior from '../../models/generalSetting/MoralBehavior.js';
 
 export const getMoralBehaviors = async (req, res, next) => {
   try {

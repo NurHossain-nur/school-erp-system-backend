@@ -1,4 +1,4 @@
-// src/models/generalsetting/Board.js
+// src/models/generalSetting/Board.js
 import mongoose from 'mongoose';
 
 const boardSchema = new mongoose.Schema(

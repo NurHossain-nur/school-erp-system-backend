@@ -1,4 +1,4 @@
-// src/models/generalsetting/CoCurricular.js
+// src/models/generalSetting/CoCurricular.js
 import mongoose from 'mongoose';
 
 const coCurricularSchema = new mongoose.Schema(

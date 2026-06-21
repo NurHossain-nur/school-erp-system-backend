@@ -1,4 +1,4 @@
-// src/routes/generalsetting/occupationRoutes.js
+// src/routes/generalSetting/occupationRoutes.js
 import express from 'express';
 import { 
   getOccupations, 
@@ -6,7 +6,7 @@ import {
   getOccupationById, 
   updateOccupation, 
   deleteOccupation 
-} from '../../controllers/generalsetting/occupationController.js';
+} from '../../controllers/generalSetting/occupationController.js';
 
 const router = express.Router();
 

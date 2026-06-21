@@ -1,6 +1,6 @@
-// src/routes/generalsetting/boardRoutes.js
+// src/routes/generalSetting/boardRoutes.js
 import express from 'express';
-import { getBoards, createBoard, getBoardById, updateBoard, deleteBoard } from '../../controllers/generalsetting/boardController.js';
+import { getBoards, createBoard, getBoardById, updateBoard, deleteBoard } from '../../controllers/generalSetting/boardController.js';
 
 const router = express.Router();
 

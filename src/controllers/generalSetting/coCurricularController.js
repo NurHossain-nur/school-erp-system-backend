@@ -1,5 +1,5 @@
-// src/controllers/generalsetting/coCurricularController.js
-import CoCurricular from '../../models/generalsetting/CoCurricular.js';
+// src/controllers/generalSetting/coCurricularController.js
+import CoCurricular from '../../models/generalSetting/CoCurricular.js';
 
 export const getCoCurriculars = async (req, res, next) => {
   try {
