@@ -30,6 +30,14 @@ import signatureRoutes from './routes/generalSetting/signatureRoutes.js';
 import examRoutineSessionRoutes from './routes/examroutine/routineSessionRoutes.js';
 import examRoutineProcessRoutes from './routes/examroutine/examRoutineProcessRoutes.js';
 
+import boardRoutes from './routes/generalsetting/boardRoutes.js';
+import coCurricularRoutes from './routes/generalsetting/coCurricularRoutes.js';
+import moralBehaviorRoutes from './routes/generalsetting/moralBehaviorRoutes.js';
+import occupationRoutes from './routes/generalsetting/occupationRoutes.js';
+
+
+
+
 const app = express();
 
 // --- 1. Global Security & Middlewares ---
@@ -95,6 +103,12 @@ app.use('/api/v1/signatures', signatureRoutes);
 
 app.use('/api/v1/exam-routine/sessions', examRoutineSessionRoutes);
 app.use('/api/v1/exam-routine/process', examRoutineProcessRoutes);
+
+app.use('/api/v1/general-settings/boards', boardRoutes);
+app.use('/api/v1/general-settings/co-curriculer-act', coCurricularRoutes);
+app.use('/api/v1/general-settings/moral-behaviors', moralBehaviorRoutes);
+app.use('/api/v1/general-settings/occupations', occupationRoutes);
+
 
 // --- 4. 404 Route Handler ---
 app.all('/', (req, res) => {
