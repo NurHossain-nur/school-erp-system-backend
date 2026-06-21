@@ -1,57 +1,83 @@
 // src/controllers/examroutine/examRoutineProcessController.js
-import Routine from '../../models/examroutine/Routine.js';
+import { ExamRoutine } from '../../models/examroutine/Routine.js';
 
-const getRoutineDocument = async () => {
-  let doc = await Routine.findOne();
-  if (!doc) doc = await Routine.create({ examRoutineSession: [], examRoutines: [] });
-  return doc;
-};
-
-// নির্দিষ্ট Exam এর সব রুটিন নিয়ে আসা
+// নির্দিষ্ট Exam এবং Year এর সব রুটিন নিয়ে আসা
 export const getExamRoutinesByExamName = async (req, res, next) => {
   try {
     const { examName, examYear } = req.query;
-    const doc = await getRoutineDocument();
     
-    let routines = doc.examRoutines;
-    if (examName) {
-      routines = routines.filter(r => r.examName === examName);
-    }
-    // Filter by year if provided
-    if (examYear) {
-      routines = routines.filter(r => r.examYear === examYear);
-    }
+    // মঙ্গোডিবি কোয়েরি অবজেক্ট তৈরি
+    const query = {};
+    if (examName) query.examName = examName;
+    if (examYear) query.examYear = examYear;
+
+    // সরাসরি ডাটাবেস থেকে ফিল্টারড ডাটা চলে আসবে, কোনো ম্যানুয়াল .filter() লাগবে না
+    const routines = await ExamRoutine.find(query).lean();
+    
     res.status(200).json({ success: true, data: routines });
-  } catch (error) { next(error); }
+  } catch (error) { 
+    next(error); 
+  }
 };
 
-// রুটিন সেভ করা (Upsert: থাকলে আপডেট, না থাকলে নতুন অ্যাড)
+// রুটিন সেভ করা (Upsert: থাকলে আপডেট, না থাকলে নতুন ডকুমেন্ট তৈরি)
 export const saveExamRoutineProcess = async (req, res, next) => {
   try {
     const { examName, examYear, className, groupName, subjects } = req.body;
-    const doc = await getRoutineDocument();
 
-    const existingIndex = doc.examRoutines.findIndex(
-      r => r.examName === examName && r.examYear === examYear && r.className === className && r.groupName === groupName
-    );
-
-    // শুধু সিলেক্ট করা সাবজেক্টগুলোই সেভ হবে
+    // শুধু সিলেক্ট করা সাবজেক্টগুলোই ফিল্টার করা হচ্ছে
     const activeSubjects = subjects.filter(s => s.isSelected);
 
-    if (existingIndex > -1) {
-      doc.examRoutines[existingIndex].subjects = activeSubjects;
-    } else {
-      doc.examRoutines.push({ examName, examYear, className, groupName, subjects: activeSubjects });
+    // 🎯 ডাটাবেস লেভেলে সরাসরি আপসার্ট (Upsert) লজিক
+    const updatedRoutine = await ExamRoutine.findOneAndUpdate(
+      { 
+        examName, 
+        examYear, 
+        className, 
+        groupName 
+      }, // এই ৪টি জিনিস মিললে আপডেট হবে
+      { 
+        $set: { subjects: activeSubjects } 
+      }, // শুধু সাবজেক্ট অ্যারেটি রিপ্লেস হবে
+      { 
+        new: true, 
+        upsert: true, 
+        setDefaultsOnInsert: true 
+      } // না থাকলে নতুন ডকুমেন্ট তৈরি হবে
+    );
+
+    res.status(200).json({ 
+      success: true, 
+      message: 'Routine Processed & Saved Successfully!',
+      data: updatedRoutine 
+    });
+  } catch (error) { 
+    console.log("🔥 MONGOOSE SAVE ERROR:", error.message);
+    next(error); 
+  }
+};
+
+
+
+
+
+// নির্দিষ্ট Exam এবং Year এর সম্পূর্ণ রুটিন ডিলিট করা
+export const deleteExamRoutineProcess = async (req, res, next) => {
+  try {
+    const { examName, examYear } = req.query;
+
+    if (!examName || !examYear) {
+      return res.status(400).json({ success: false, message: "examName and examYear are required parameters." });
     }
 
-    await doc.save();
-    res.status(200).json({ success: true, message: 'Routine Processed & Saved Successfully!' });
-  } catch (error) { 
-    
-    // 👇 ADD THESE TWO LINES 👇
-    console.log("🔥 MONGOOSE SAVE ERROR:", error.message);
-    // res.status(500).json({ success: false, message: error.message });
+    // নির্দিষ্ট পরীক্ষা ও বছরের সব রুটিন ডকুমেন্ট ডিলিট করবে
+    const result = await ExamRoutine.deleteMany({ examName, examYear });
 
-    next(error); 
+    res.status(200).json({ 
+      success: true, 
+      message: `Successfully deleted ${result.deletedCount} routine records for ${examName} (${examYear}).`
+    });
+  } catch (error) {
+    next(error);
   }
 };

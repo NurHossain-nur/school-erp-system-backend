@@ -1,7 +1,7 @@
 // src/models/examroutine/Routine.js
 import mongoose from 'mongoose';
 
-// Exam Routine Session এর স্কিমা
+// Exam Routine Session এর স্কিমা (এটি আগের মতোই থাকবে)
 const examRoutineSessionSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   routineHeader: { type: String, trim: true },
@@ -9,10 +9,20 @@ const examRoutineSessionSchema = new mongoose.Schema({
   endTime: { type: String, required: true }
 });
 
-// 💡 নতুন: Processed Exam Routine স্কিমা
-const processedRoutineSchema = new mongoose.Schema({
-  examName: { type: String, required: true },
-  examYear: { type: String },
+// মূল Routine (শুধু সেশন বা গ্লোবাল কনফিগারেশনের জন্য)
+const routineSchema = new mongoose.Schema(
+  {
+    examRoutineSession: [examRoutineSessionSchema]
+  },
+  { timestamps: true }
+);
+
+export const Routine = mongoose.model('Routine', routineSchema);
+
+// 🎯 নতুন স্বাধীন মডেল: প্রতিটি রুটিন প্রসেস আলাদা ডকুমেন্ট হিসেবে সেভ হবে
+const examRoutineSchema = new mongoose.Schema({
+  examName: { type: String, required: true, trim: true },
+  examYear: { type: String, required: true },
   className: { type: String, required: true },
   groupName: { type: String, required: true },
   subjects: [{
@@ -22,17 +32,6 @@ const processedRoutineSchema = new mongoose.Schema({
     roomNo: { type: String },
     isSelected: { type: Boolean, default: true }
   }]
-});
+}, { timestamps: true }); // এতে রুটিন কখন তৈরি বা আপডেট হলো তা ট্র্যাক থাকবে
 
-// মূল Routine স্কিমা
-const routineSchema = new mongoose.Schema(
-  {
-    examRoutineSession: [examRoutineSessionSchema],
-    examRoutines: [processedRoutineSchema]
-    // ভবিষ্যতে regularRoutine, classRoutine ইত্যাদি এখানে যুক্ত হবে
-  },
-  { timestamps: true }
-);
-
-const Routine = mongoose.model('Routine', routineSchema);
-export default Routine;
+export const ExamRoutine = mongoose.model('ExamRoutine', examRoutineSchema);

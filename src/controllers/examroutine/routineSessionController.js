@@ -1,5 +1,5 @@
 // src/controllers/examroutine/routineSessionController.js
-import Routine from '../../models/examroutine/Routine.js';
+import {Routine} from '../../models/examroutine/Routine.js';
 
 // হেল্পার ফাংশন: মেইন রুটিন ডকুমেন্টটি খুঁজে বের করা বা তৈরি করা
 const getRoutineDocument = async () => {
