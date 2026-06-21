@@ -30,10 +30,10 @@ import signatureRoutes from './routes/generalSetting/signatureRoutes.js';
 import examRoutineSessionRoutes from './routes/examroutine/routineSessionRoutes.js';
 import examRoutineProcessRoutes from './routes/examroutine/examRoutineProcessRoutes.js';
 
-import boardRoutes from './routes/generalsetting/boardRoutes.js';
-import coCurricularRoutes from './routes/generalsetting/coCurricularRoutes.js';
-import moralBehaviorRoutes from './routes/generalsetting/moralBehaviorRoutes.js';
-import occupationRoutes from './routes/generalsetting/occupationRoutes.js';
+import boardRoutes from './routes/generalSetting/boardRoutes.js';
+import coCurricularRoutes from './routes/generalSetting/coCurricularRoutes.js';
+import moralBehaviorRoutes from './routes/generalSetting/moralBehaviorRoutes.js';
+import occupationRoutes from './routes/generalSetting/occupationRoutes.js';
 
 
 
