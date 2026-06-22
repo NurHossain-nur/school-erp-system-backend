@@ -35,6 +35,12 @@ import coCurricularRoutes from './routes/generalSetting/coCurricularRoutes.js';
 import moralBehaviorRoutes from './routes/generalSetting/moralBehaviorRoutes.js';
 import occupationRoutes from './routes/generalSetting/occupationRoutes.js';
 
+import teacherSectionRoutes from './routes/teacherspreset/teacherSectionRoutes.js';
+import teacherDesignationRoutes from './routes/teacherspreset/teacherDesignationRoutes.js';
+import teacherPayCodeRoutes from './routes/teacherspreset/teacherPayCodeRoutes.js';
+import teacherQualificationRoutes from './routes/teacherspreset/teacherQualificationRoutes.js';
+import teacherRoutes from './routes/teachers/teacherRoutes.js';
+
 
 
 
@@ -108,6 +114,14 @@ app.use('/api/v1/general-settings/boards', boardRoutes);
 app.use('/api/v1/general-settings/co-curriculer-act', coCurricularRoutes);
 app.use('/api/v1/general-settings/moral-behaviors', moralBehaviorRoutes);
 app.use('/api/v1/general-settings/occupations', occupationRoutes);
+
+
+// Teachers Preset এর API গুলো একটি নির্দিষ্ট গ্রুপে রাখা হলো
+app.use('/api/v1/teachers-presets/sections', teacherSectionRoutes);
+app.use('/api/v1/teachers-presets/designations', teacherDesignationRoutes);
+app.use('/api/v1/teachers-presets/pay-codes', teacherPayCodeRoutes);
+app.use('/api/v1/teachers-presets/qualifications', teacherQualificationRoutes);
+app.use('/api/v1/teachers', teacherRoutes);
 
 
 // --- 4. 404 Route Handler ---
