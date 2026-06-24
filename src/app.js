@@ -41,6 +41,20 @@ import teacherPayCodeRoutes from './routes/teacherspreset/teacherPayCodeRoutes.j
 import teacherQualificationRoutes from './routes/teacherspreset/teacherQualificationRoutes.js';
 import teacherRoutes from './routes/teachers/teacherRoutes.js';
 
+import studentRoutes from './routes/students/studentRoutes.js';
+import studentOffenseRoutes from './routes/students/studentOffenseRoutes.js';
+import disciplinaryActionRoutes from './routes/students//disciplinaryActionRoutes.js';
+import studentReportRoutes from './routes/studentreport/studentReportRoutes.js';
+import studentSummaryRoutes from './routes/studentreport/studentSummaryRoutes.js';
+import studentValidationRoutes from './routes/studentreport/studentValidationRoutes.js';
+import teacherUnassignedRoutes from './routes/studentreport/teacherUnassignedRoutes.js';
+import comparisonRoutes from './routes/studentreport/studentComparisonRoutes.js';
+import taughtListRoutes from './routes/studentreport/taughtListRoutes.js';
+import teacherWiseRoutes from './routes/studentreport/teacherWiseRoutes.js';
+import studentSearchRoutes from './routes/studentreport/studentSearchRoutes.js';
+import dayWiseAdmissionReportRoutes from './routes/studentreport/dayWiseAdmissionReportRoutes.js';
+import studentDuplicateReportRoutes from './routes/studentreport/studentDuplicateReportRoutes.js';
+
 
 
 
@@ -122,6 +136,22 @@ app.use('/api/v1/teachers-presets/designations', teacherDesignationRoutes);
 app.use('/api/v1/teachers-presets/pay-codes', teacherPayCodeRoutes);
 app.use('/api/v1/teachers-presets/qualifications', teacherQualificationRoutes);
 app.use('/api/v1/teachers', teacherRoutes);
+
+
+// Students section api
+app.use('/api/v1/students', studentRoutes);
+app.use('/api/v1/student-offenses', studentOffenseRoutes);
+app.use('/api/v1/disciplinary-actions', disciplinaryActionRoutes);
+app.use('/api/v1/student-reports', studentReportRoutes);
+app.use('/api/v1/student-summary', studentSummaryRoutes);
+app.use('/api/v1/student-validation', studentValidationRoutes);
+app.use('/api/v1/teacher-unassigned', teacherUnassignedRoutes);
+app.use('/api/v1/student-comparison', comparisonRoutes);
+app.use('/api/v1/student-taught-list', taughtListRoutes);
+app.use('/api/v1/student-teacher-wise', teacherWiseRoutes);
+app.use('/api/v1/student-search', studentSearchRoutes);
+app.use('/api/v1/day-wise', dayWiseAdmissionReportRoutes);
+app.use('/api/v1/student-duplicate-report', studentDuplicateReportRoutes);
 
 
 // --- 4. 404 Route Handler ---
